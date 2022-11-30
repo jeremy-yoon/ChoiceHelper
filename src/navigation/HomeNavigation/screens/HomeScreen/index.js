@@ -16,7 +16,7 @@ import {useNavigation} from '@react-navigation/native';
 //images
 
 //components
-import {ButtonL, SingleLineList, St, Sv} from 'components/index';
+import {ButtonL, TwoLineList, St, Sv} from 'components/index';
 
 export const HomeScreen = () => {
   const navigation = useNavigation();
@@ -25,6 +25,10 @@ export const HomeScreen = () => {
 
   const goAddWorryScreen = () => {
     navigation.navigate('AddWorryScreen');
+  };
+
+  const goWorryDetailScreen = () => {
+    navigation.navigate('WorryDetailScreen');
   };
 
   return (
@@ -45,10 +49,31 @@ export const HomeScreen = () => {
         <Sv my={20}>
           <ButtonL line title="새로운 고민 추가 +" onPress={goAddWorryScreen} />
         </Sv>
+        <Sv>
+          <St s1 g0 mt={20}>
+            해결 중인 고민
+          </St>
+        </Sv>
         <FlatList
           data={worries}
-          renderItem={({item}) => <SingleLineList title={item.title} />}
+          renderItem={({item}) => (
+            <TwoLineList title={item.solution} date={item.title} />
+          )}
           keyExtractor={item => item.id}
+          onPress={goWorryDetailScreen}
+        />
+        <Sv>
+          <St s1 g0 mt={20}>
+            해결한 고민
+          </St>
+        </Sv>
+        <FlatList
+          data={worries}
+          renderItem={({item}) => (
+            <TwoLineList title={item.solution} date={item.title} />
+          )}
+          keyExtractor={item => item.id}
+          onPress={goWorryDetailScreen}
         />
       </Sv>
     </S.Container>

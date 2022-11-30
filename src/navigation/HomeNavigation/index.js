@@ -3,6 +3,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Platform} from 'react-native';
 import {HomeScreen} from './screens/HomeScreen';
 import {AddWorryScreen} from './screens/AddWorryScreen';
+import {WorryDetailScreen} from './screens/WorryDetailScreen';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ export const HomeNavigation = () => {
       }}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="AddWorryScreen" component={AddWorryScreen} />
+      <Stack.Screen name="WorryDetailScreen" component={WorryDetailScreen} />
     </Stack.Navigator>
   );
 };

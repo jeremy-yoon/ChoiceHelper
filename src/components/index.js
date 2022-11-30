@@ -7,6 +7,7 @@ export {ButtonL} from 'components/Button/ButtonL';
 
 //lists
 export {SingleLineList} from 'components/List/SingleLineList';
+export {TwoLineList} from 'components/List/TwoLineList';
 
 //inputs
 export {InputL} from 'components/Input/InputL';
