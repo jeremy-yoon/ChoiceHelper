@@ -27,8 +27,8 @@ export const HomeScreen = () => {
     navigation.navigate('AddWorryScreen');
   };
 
-  const goWorryDetailScreen = () => {
-    navigation.navigate('WorryDetailScreen');
+  const goWorryDetailScreen = id => {
+    navigation.navigate('WorryDetailScreen', {id: id});
   };
 
   return (
@@ -57,10 +57,13 @@ export const HomeScreen = () => {
         <FlatList
           data={worries}
           renderItem={({item}) => (
-            <TwoLineList title={item.solution} date={item.title} />
+            <TwoLineList
+              title={item.solution}
+              date={item.title}
+              onPress={() => goWorryDetailScreen(item.id)}
+            />
           )}
           keyExtractor={item => item.id}
-          onPress={goWorryDetailScreen}
         />
         <Sv>
           <St s1 g0 mt={20}>
@@ -70,10 +73,13 @@ export const HomeScreen = () => {
         <FlatList
           data={worries}
           renderItem={({item}) => (
-            <TwoLineList title={item.solution} date={item.title} />
+            <TwoLineList
+              title={item.solution}
+              date={item.title}
+              onPress={() => goWorryDetailScreen(item.id)}
+            />
           )}
           keyExtractor={item => item.id}
-          onPress={goWorryDetailScreen}
         />
       </Sv>
     </S.Container>

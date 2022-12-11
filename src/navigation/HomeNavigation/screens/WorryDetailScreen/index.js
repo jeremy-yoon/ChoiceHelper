@@ -18,18 +18,34 @@ import {useNavigation} from '@react-navigation/native';
 //components
 import {ButtonL, InputL, St, Sv} from 'components/index';
 
-export const WorryDetailScreen = () => {
+export const WorryDetailScreen = ({route}) => {
   const navigation = useNavigation();
+  const {id} = route.params;
 
   const [worries, setWorries] = useRecoilState(worriesAtom);
 
   return (
     <S.Container>
+      <Sv mx={22} mt={12}>
+        <Sv>
+          <St h3 g0 mt={20}>
+            {worries[id].title}
+          </St>
+          <St b2 g3 mt={8}>
+            {`고민의 답은 이미 알고 있을 거예요.
+결정하는 것 만으로 이뤄지는 것은 많아요.`}
+          </St>
+        </Sv>
+        <Sv>
+          <St b1 g0 mt={20}>
+            {worries[id].solution}
+          </St>
+        </Sv>
+      </Sv>
       <S.ButtonWrapper>
         <ButtonL
-          disabled={worryTitle.length === 0}
           title={'고민 완료하기'}
-          onPress={onPressNext}
+          // onPress={onPressNext}
         />
       </S.ButtonWrapper>
     </S.Container>
