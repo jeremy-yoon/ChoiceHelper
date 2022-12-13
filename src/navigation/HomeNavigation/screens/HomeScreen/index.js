@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState, useLayoutEffect} from 'react';
 import {
   View,
   Text,
@@ -31,6 +31,10 @@ export const HomeScreen = () => {
     navigation.navigate('WorryDetailScreen', {id: id});
   };
 
+  useEffect(() => {
+    console.log(worries);
+  }, []);
+
   return (
     <S.Container>
       <Sv mx={22} mt={12}>
@@ -55,7 +59,7 @@ export const HomeScreen = () => {
           </St>
         </Sv>
         <FlatList
-          data={worries}
+          data={worries.filter(worry => worry.isSolved === false)}
           renderItem={({item}) => (
             <TwoLineList
               title={item.solution}
@@ -71,7 +75,7 @@ export const HomeScreen = () => {
           </St>
         </Sv>
         <FlatList
-          data={worries}
+          data={worries.filter(worry => worry.isSolved === true)}
           renderItem={({item}) => (
             <TwoLineList
               title={item.solution}

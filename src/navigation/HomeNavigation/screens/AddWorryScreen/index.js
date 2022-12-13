@@ -38,15 +38,10 @@ export const AddWorryScreen = () => {
           id: worries.length + 1,
           title: worryTitle,
           solution: solutionTitle,
+          isSolved: false,
         },
       ]);
       navigation.goBack();
-    }
-  };
-
-  const onPressPrev = () => {
-    if (step > 1) {
-      setStep(step - 1);
     }
   };
 
