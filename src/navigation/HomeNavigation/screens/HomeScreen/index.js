@@ -1,26 +1,15 @@
-import React, {useEffect, useState, useLayoutEffect} from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import React from 'react';
+import {SafeAreaView, FlatList} from 'react-native';
 import styled from 'styled-components';
-import n from 'helper/normalize';
-import {colors} from 'styles/colors';
 import {worriesAtom} from 'store/atom/worry';
 import {useRecoilState} from 'recoil';
 import {useNavigation} from '@react-navigation/native';
-
-//images
 
 //components
 import {ButtonL, TwoLineList, St, Sv} from 'components/index';
 
 export const HomeScreen = () => {
   const navigation = useNavigation();
-
   const [worries, setWorries] = useRecoilState(worriesAtom);
 
   const goAddWorryScreen = () => {
@@ -28,12 +17,11 @@ export const HomeScreen = () => {
   };
 
   const goWorryDetailScreen = id => {
-    navigation.navigate('WorryDetailScreen', {id: id});
+    navigation.navigate('WorryDetailScreen', {id});
   };
 
-  useEffect(() => {
-    console.log(worries);
-  }, []);
+  const unresolvedWorries = worries.filter(worry => !worry.isSolved);
+  const resolvedWorries = worries.filter(worry => worry.isSolved);
 
   return (
     <S.Container>
@@ -59,7 +47,7 @@ export const HomeScreen = () => {
           </St>
         </Sv>
         <FlatList
-          data={worries.filter(worry => worry.isSolved === false)}
+          data={unresolvedWorries}
           renderItem={({item}) => (
             <TwoLineList
               title={item.solution}
@@ -75,7 +63,7 @@ export const HomeScreen = () => {
           </St>
         </Sv>
         <FlatList
-          data={worries.filter(worry => worry.isSolved === true)}
+          data={resolvedWorries}
           renderItem={({item}) => (
             <TwoLineList
               title={item.solution}

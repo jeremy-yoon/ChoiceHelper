@@ -13,14 +13,11 @@ import {worriesAtom, writingWorriesAtom} from 'store/atom/worry';
 import {useRecoilState} from 'recoil';
 import {useNavigation} from '@react-navigation/native';
 
-//images
-
 //components
 import {ButtonL, InputL, St, Sv} from 'components/index';
 
 export const AddWorryScreen = () => {
   const navigation = useNavigation();
-
   const [worries, setWorries] = useRecoilState(worriesAtom);
   const [writingWorries, setWritingWorries] =
     useRecoilState(writingWorriesAtom);
@@ -28,21 +25,29 @@ export const AddWorryScreen = () => {
   const [solutionTitle, setSolutionTitle] = useState('');
   const [step, setStep] = useState(1);
 
-  const onPressNext = () => {
+  const onPressNext = useCallback(() => {
     if (step === 1) {
       setStep(2);
     } else {
-      setWorries([
-        ...worries,
-        {
-          id: worries.length + 1,
-          title: worryTitle,
-          solution: solutionTitle,
-          isSolved: false,
-        },
-      ]);
-      navigation.goBack();
+      addWorry();
+      navigateBack();
     }
+  }, [step, addWorry, navigateBack]);
+
+  const addWorry = () => {
+    setWorries([
+      ...worries,
+      {
+        id: worries.length + 1,
+        title: worryTitle,
+        solution: solutionTitle,
+        isSolved: false,
+      },
+    ]);
+  };
+
+  const navigateBack = () => {
+    navigation.goBack();
   };
 
   return (

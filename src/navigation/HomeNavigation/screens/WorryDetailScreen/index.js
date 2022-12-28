@@ -1,19 +1,9 @@
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  SafeAreaView,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
+import {View, SafeAreaView} from 'react-native';
 import styled from 'styled-components';
-import n from 'helper/normalize';
-import {colors} from 'styles/colors';
-import {worriesAtom, writingWorriesAtom} from 'store/atom/worry';
+import {worriesAtom} from 'store/atom/worry';
 import {useRecoilState} from 'recoil';
 import {useNavigation} from '@react-navigation/native';
-
-//images
 
 //components
 import {ButtonL, InputL, St, Sv} from 'components/index';
@@ -31,12 +21,10 @@ export const WorryDetailScreen = ({route}) => {
       worries.map(worry => {
         if (worry.id === id) {
           return {...worry, isSolved: true};
-        } else {
-          return worry;
         }
+        return worry;
       }),
     );
-
     navigation.goBack();
   };
 
